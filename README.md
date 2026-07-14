@@ -4,7 +4,7 @@ React (Vite) + Tailwind CSS.
 
 ## Setup
 
-1. Copy `.env.example` to `.env` (optional — dev server proxies `/api` to `http://localhost:5000` by default).
+1. Copy `.env.example` to `.env` (optional — dev server proxies `/api` to `http://localhost:5001` by default).
 2. Install dependencies: `npm install`
 3. Run dev server: `npm run dev` (http://localhost:5173)
 4. Build for production: `npm run build`
