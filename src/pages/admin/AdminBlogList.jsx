@@ -58,7 +58,7 @@ export default function AdminBlogList() {
         <h2 className="text-lg font-semibold text-gray-900">Blogs</h2>
         <Link
           to="/blogs/new"
-          className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+          className="rounded-md bg-brand-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-800"
         >
           New Blog
         </Link>
@@ -70,12 +70,12 @@ export default function AdminBlogList() {
           placeholder="Search by title..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-xs rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+          className="w-full max-w-xs rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
         />
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+          className="rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
         >
           <option value="latest">Latest first</option>
           <option value="oldest">Oldest first</option>
