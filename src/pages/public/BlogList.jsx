@@ -17,7 +17,7 @@ export default function BlogList() {
   return (
     <div>
       <Helmet>
-        <title>Blog | CRM-admin</title>
+        <title>Blog | TZI CRM Admin</title>
         <meta name="description" content="Latest articles and updates." />
       </Helmet>
 

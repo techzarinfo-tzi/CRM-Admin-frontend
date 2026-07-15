@@ -25,7 +25,7 @@ export default function BlogDetails() {
     return (
       <div>
         <p className="text-sm text-gray-500">Blog post not found.</p>
-        <Link to="/blog" className="mt-2 inline-block text-sm font-medium text-gray-900 hover:underline">
+        <Link to="/blog" className="mt-2 inline-block text-sm font-medium text-brand-700 hover:underline">
           Back to blog
         </Link>
       </div>

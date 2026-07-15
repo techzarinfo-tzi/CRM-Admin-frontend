@@ -159,7 +159,7 @@ export default function AdminBlogForm() {
               name="title"
               value={form.title}
               onChange={handleTitleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
             />
             {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
           </div>
@@ -171,7 +171,7 @@ export default function AdminBlogForm() {
               name="slug"
               value={form.slug}
               onChange={handleSlugChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
             />
             {errors.slug && <p className="mt-1 text-xs text-red-600">{errors.slug}</p>}
           </div>
@@ -212,7 +212,7 @@ export default function AdminBlogForm() {
               name="metaTitle"
               value={form.metaTitle}
               onChange={handleChange('metaTitle')}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
             />
           </div>
 
@@ -223,7 +223,7 @@ export default function AdminBlogForm() {
               name="metaDescription"
               value={form.metaDescription}
               onChange={handleChange('metaDescription')}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
             />
           </div>
 
@@ -235,7 +235,7 @@ export default function AdminBlogForm() {
               placeholder="comma, separated, keywords"
               value={form.metaKeywords}
               onChange={handleChange('metaKeywords')}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-600 focus:outline-none"
             />
           </div>
 
@@ -247,18 +247,18 @@ export default function AdminBlogForm() {
               placeholder='{ "@context": "https://schema.org", "@type": "BlogPosting" }'
               value={form.schemaMarkup}
               onChange={handleChange('schemaMarkup')}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-xs focus:border-gray-900 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-xs focus:border-brand-600 focus:outline-none"
             />
             {errors.schemaMarkup && <p className="mt-1 text-xs text-red-600">{errors.schemaMarkup}</p>}
           </div>
         </section>
 
-        <div className="flex justify-end gap-3">
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
             type="button"
             disabled={submitting}
             onClick={() => submit('draft')}
-            className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+            className="rounded-md border border-gray-300 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
           >
             Save as Draft
           </button>
@@ -266,7 +266,7 @@ export default function AdminBlogForm() {
             type="button"
             disabled={submitting}
             onClick={() => submit('published')}
-            className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+            className="rounded-md bg-brand-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-800 disabled:opacity-50"
           >
             Publish
           </button>

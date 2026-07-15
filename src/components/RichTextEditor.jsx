@@ -13,7 +13,7 @@ const modules = {
 
 export default function RichTextEditor({ value, onChange, placeholder }) {
   return (
-    <div className="rounded-md border border-gray-300 bg-white [&_.ql-container]:min-h-56 [&_.ql-container]:rounded-b-md [&_.ql-toolbar]:rounded-t-md">
+    <div className="rounded-md border border-gray-300 bg-white [&_.ql-container]:min-h-56 [&_.ql-container]:rounded-b-md [&_.ql-toolbar]:overflow-x-auto [&_.ql-toolbar]:rounded-t-md">
       <ReactQuill theme="snow" value={value} onChange={onChange} modules={modules} placeholder={placeholder} />
     </div>
   )
