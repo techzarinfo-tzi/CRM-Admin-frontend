@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import RichTextEditor from '@/components/RichTextEditor'
 import { getAdminBlogById, createBlog, updateBlog, uploadBlogImage } from '@/api/blog'
+import { resolveAssetUrl } from '@/api/axios'
 import { slugify } from '@/utils/slugify'
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024
@@ -14,7 +15,6 @@ const emptyForm = {
   metaTitle: '',
   metaDescription: '',
   metaKeywords: '',
-  schemaMarkup: '',
   status: 'draft',
 }
 
@@ -26,6 +26,7 @@ export default function AdminBlogForm() {
   const [form, setForm] = useState(emptyForm)
   const [imageFile, setImageFile] = useState(null)
   const [imagePreview, setImagePreview] = useState('')
+  const [schemaPreview, setSchemaPreview] = useState(null)
   const [loading, setLoading] = useState(isEdit)
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors] = useState({})
@@ -43,10 +44,10 @@ export default function AdminBlogForm() {
           metaTitle: blog.metaTitle || '',
           metaDescription: blog.metaDescription || '',
           metaKeywords: (blog.metaKeywords || []).join(', '),
-          schemaMarkup: blog.schemaMarkup ? JSON.stringify(blog.schemaMarkup, null, 2) : '',
           status: blog.status || 'draft',
         })
         setImagePreview(blog.featuredImage || '')
+        setSchemaPreview(blog.schemaMarkup || null)
         slugManuallyEdited.current = true
       })
       .catch((err) => toast.error(err.response?.data?.message || 'Failed to load blog'))
@@ -86,13 +87,6 @@ export default function AdminBlogForm() {
     if (!form.title.trim()) next.title = 'Blog title is required'
     if (!form.slug.trim()) next.slug = 'Slug is required'
     if (!form.content.trim() || form.content === '<p><br></p>') next.content = 'Blog content is required'
-    if (form.schemaMarkup.trim()) {
-      try {
-        JSON.parse(form.schemaMarkup)
-      } catch {
-        next.schemaMarkup = 'Schema must be valid JSON'
-      }
-    }
     setErrors(next)
     return Object.keys(next).length === 0
   }
@@ -114,7 +108,6 @@ export default function AdminBlogForm() {
         metaTitle: form.metaTitle,
         metaDescription: form.metaDescription,
         metaKeywords: form.metaKeywords,
-        schemaMarkup: form.schemaMarkup,
         status,
         ...(featuredImage !== undefined && { featuredImage }),
       }
@@ -187,7 +180,11 @@ export default function AdminBlogForm() {
             />
             <p className="mt-1 text-xs text-gray-400">PNG, JPG, WEBP or GIF. Max 5MB.</p>
             {imagePreview && (
-              <img src={imagePreview} alt="" className="mt-3 h-32 w-full max-w-xs rounded-md object-cover" />
+              <img
+                src={resolveAssetUrl(imagePreview)}
+                alt=""
+                className="mt-3 h-32 w-full max-w-xs rounded-md object-cover"
+              />
             )}
           </div>
 
@@ -241,15 +238,17 @@ export default function AdminBlogForm() {
 
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">Schema (JSON-LD)</label>
-            <textarea
-              rows={5}
-              name="schemaMarkup"
-              placeholder='{ "@context": "https://schema.org", "@type": "BlogPosting" }'
-              value={form.schemaMarkup}
-              onChange={handleChange('schemaMarkup')}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 font-mono text-xs focus:border-brand-600 focus:outline-none"
-            />
-            {errors.schemaMarkup && <p className="mt-1 text-xs text-red-600">{errors.schemaMarkup}</p>}
+            <p className="mb-2 text-xs text-gray-400">
+              Generated automatically from the title, meta description, featured image, and publish dates above —
+              nothing to fill in here.
+            </p>
+            {schemaPreview ? (
+              <pre className="max-h-56 overflow-auto rounded-md border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-xs text-gray-600">
+                {JSON.stringify(schemaPreview, null, 2)}
+              </pre>
+            ) : (
+              <p className="text-xs text-gray-400">Structured data will appear here once the blog is saved.</p>
+            )}
           </div>
         </section>
 

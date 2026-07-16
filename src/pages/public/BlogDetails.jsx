@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import dayjs from 'dayjs'
 import { getPublicBlogBySlug } from '@/api/blog'
+import { resolveAssetUrl } from '@/api/axios'
 
 export default function BlogDetails() {
   const { slug } = useParams()
@@ -51,7 +52,7 @@ export default function BlogDetails() {
       </p>
 
       {blog.featuredImage && (
-        <img src={blog.featuredImage} alt={blog.title} className="mt-6 w-full rounded-lg object-cover" />
+        <img src={resolveAssetUrl(blog.featuredImage)} alt={blog.title} className="mt-6 w-full rounded-lg object-cover" />
       )}
 
       <div

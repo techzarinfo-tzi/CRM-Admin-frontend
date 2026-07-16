@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import dayjs from 'dayjs'
 import { listPublicBlogs } from '@/api/blog'
+import { resolveAssetUrl } from '@/api/axios'
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([])
@@ -36,7 +37,7 @@ export default function BlogList() {
           >
             {blog.featuredImage ? (
               <img
-                src={blog.featuredImage}
+                src={resolveAssetUrl(blog.featuredImage)}
                 alt={blog.title}
                 className="h-44 w-full object-cover transition group-hover:scale-105"
               />

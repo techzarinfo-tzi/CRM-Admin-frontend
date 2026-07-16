@@ -3,8 +3,10 @@ import api from './axios'
 export const listPublicBlogs = (params) => api.get('/blogs', { params })
 export const getPublicBlogBySlug = (slug) => api.get(`/blogs/${slug}`)
 
-export const listAdminBlogs = (params) => api.get('/blogs/admin/all', { params })
-export const getAdminBlogById = (id) => api.get(`/blogs/admin/${id}`)
+// Cache-busted: this list is read right after create/update/delete, and a
+// stale cached response (browser or intermediary) would show the old data.
+export const listAdminBlogs = (params) => api.get('/blogs/admin/all', { params: { ...params, _t: Date.now() } })
+export const getAdminBlogById = (id) => api.get(`/blogs/admin/${id}`, { params: { _t: Date.now() } })
 
 export const uploadBlogImage = (file) => {
   const formData = new FormData()
