@@ -171,13 +171,15 @@ export default function AdminBlogForm() {
 
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">Featured Image</label>
-            <input
-              type="file"
-              name="featuredImage"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="block text-sm"
-            />
+            <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-4 transition-colors hover:border-brand-400 hover:bg-brand-50">
+              <input
+                type="file"
+                name="featuredImage"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="block w-full text-sm text-gray-600 file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-brand-700 file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white file:transition-colors hover:file:bg-brand-800"
+              />
+            </div>
             <p className="mt-1 text-xs text-gray-400">PNG, JPG, WEBP or GIF. Max 5MB.</p>
             {imagePreview && (
               <img
